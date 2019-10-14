@@ -7,7 +7,7 @@ public class Main {
         JFrame frame = new JFrame("University-DS-Case_11");
         frame.setContentPane(new MainWindow().getMainPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.pack();
+        frame.pack();
         frame.setVisible(true);
     }
 }
