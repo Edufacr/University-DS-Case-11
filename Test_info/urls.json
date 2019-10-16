@@ -1,0 +1,9 @@
+{
+	"anchura" : 4,
+	"profundidad" : 3,
+	"urls" :
+	[
+		"http://json.org/",
+		"https://en.wikipedia.org/wiki/Wikipedia"
+	]
+}
