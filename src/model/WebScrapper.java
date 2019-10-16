@@ -15,11 +15,20 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class WebScrapper {
+	private static WebScrapper singleton;
 	private ArrayList<String> words;
 	private ArrayList<String> urls;
 	
-	public WebScrapper() {
+	private WebScrapper() {
 		this.words = new ArrayList<String>();
+		this.urls = new ArrayList<String>();
+	}
+	
+	public static WebScrapper getInstance() {
+		if (singleton == null) {
+			singleton = new WebScrapper();
+		}
+		return singleton;
 	}
 	
 	public void scrapUrl(String pUrl, int pWidth) {
@@ -39,6 +48,23 @@ public class WebScrapper {
 	        
 	        // parses html String to a doc using Jsoup
 	        Document doc = Jsoup.parse(html); 
+	        
+	        // extracts indicated amount of urls from doc
+	        Elements elts = doc.getElementsByTag("a");
+	        Iterator it = elts.iterator();
+	        
+	        
+	        while(it.hasNext()) {
+	        	String next = it.next().toString();
+	        	String[] splits = next.split("\"");
+	        	if (next.contains("https://") && splits.length >1) {	        		
+	        		for (String s : splits) {
+	        			if (s.contains("https://") && urls.size() < pWidth) {
+	        				urls.add(s.toString());
+	        			}
+	        		}
+	        	}
+	        }
 	        
 	        
 	        // extracts words from doc
@@ -66,20 +92,7 @@ public class WebScrapper {
 	        	words.add(s);
 	        }
 	        
-	        // extracts indicated amount of urls from doc
-	        Elements elts = doc.getElementsByTag("a");
-	        Iterator it = elts.iterator();
-	        
-	        while(it.hasNext() != false) {
-	        	if (it.next().toString().contains("https://")) {
-	        		String[] splits = it.next().toString().split("\"");
-	        		for (String s : splits) {
-	        			if (s.contains("https://") && this.urls.size() < pWidth) {
-	        				this.urls.add(s);
-	        			}
-	        		}
-	        	}
-	        }   
+	         
 	        
 	    } catch (MalformedURLException e) {
 	    	e.printStackTrace();
@@ -98,26 +111,5 @@ public class WebScrapper {
 	
 	public ArrayList<String> getUrls(){
 		return this.urls;
-	}
-	
-	public boolean isUrl(String pUrl) {
-		try {
-			URL url = new URL(pUrl);
-			return true;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-		return false;
-	}
-	
-	
-	public static void main(String[] args) {
-		WebScrapper ws = new WebScrapper();
-		ws.scrapUrl("https://en.wikipedia.org/wiki/McKinley_Birthplace_Memorial_gold_dollar",3);
-		System.out.println(ws.getUrls());
-
-		
 	}
 }
