@@ -82,9 +82,9 @@ public class WebScrapper {
 	        }   
 	        
 	    } catch (MalformedURLException e) {
-	    	System.out.println("a");
+	    	e.printStackTrace();
 	    } catch (IOException e) {
-	    	System.out.println("b");
+	    	e.printStackTrace();
 	    }
 	}
 	
@@ -105,7 +105,9 @@ public class WebScrapper {
 			URL url = new URL(pUrl);
 			return true;
 		} catch (MalformedURLException e) {
+			e.printStackTrace();
 	    } catch (IOException e) {
+	    	e.printStackTrace();
 	    }
 		return false;
 	}
