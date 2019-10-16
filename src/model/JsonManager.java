@@ -81,13 +81,5 @@ public class JsonManager implements IConstants{
 	public ArrayList<String> getUrls() {
 		return this.urls;
 	}
-	
-	public static void main(String[] args) {
-		JsonManager jm = JsonManager.getInstance();
-		System.out.println(jm.getDepth());
-		System.out.println(jm.getWidth());
-		System.out.println(jm.getUrls());
-	}
-	
 }
 
