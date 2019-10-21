@@ -1,12 +1,11 @@
 package model;
 
-import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public class TreeManager {
 	
 	private JsonManager json;
 	private WebScrapper web;
-	private PriorityQueue<String> queue;
 	
 	public TreeManager(){
 		this.json = JsonManager.getInstance();
@@ -15,19 +14,29 @@ public class TreeManager {
 	}
 	
 	private void scrapWeb() {
-		int width = this.json.getWidth();
-		for (String url : this.json.getUrls()) {
-			this.web.scrapUrl(url, width);
+		int depth = this.json.getDepth();
+		int count = 0;
+		ArrayList<String> finalUrl = new ArrayList<String>();
+		finalUrl.addAll(this.json.getUrls());
+		ArrayList<String> temp = new ArrayList<String>();
+		
+		for (String url : finalUrl) {
+			temp = loadURLs(temp, url, count, depth);
+			finalUrl.addAll(temp);
+			temp.clear();
 		}
+		System.out.println(finalUrl);
+	}
+	
+	private ArrayList<String> loadURLs(ArrayList<String> pArray, String pUrl, int pCount, int pDepth){
+		if (pCount < pDepth) {
+			return loadURLs(pArray, pUrl, pCount++, pDepth);
+		}
+		this.web.scrapUrl(pUrl, this.json.getWidth());
+		return pArray;
 	}
 	
 	public static void main(String[] args) {
-		PriorityQueue<String> queue = new PriorityQueue<String>();
-		queue.add("B");
-		queue.add("D");
-		queue.add("A");
-		queue.add("E");
-		queue.add("C");
-
+		TreeManager tm = new TreeManager();
 	}
 }

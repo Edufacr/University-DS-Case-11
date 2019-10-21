@@ -20,16 +20,13 @@ public class AVLNode<T> implements Comparable<AVLNode>{
 		return this.balance;
 	}
 	
-	public void decBalance() {
-		this.balance--;
-	}
-	
-	public void incBalance() {
-		this.balance++;
-	}
-	
-	public void setBalance(int pBalance) {
-		this.balance = pBalance;
+	public void updateBalance() {
+		int leftBalance = 0;
+		int rightBalance = 0;
+		
+		// recursive function to get height
+		
+		this.balance = rightBalance - leftBalance;
 	}
 	
 	public AVLNode<T> getRight() {
