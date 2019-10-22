@@ -4,25 +4,17 @@ package model;
 public class AVLNode<T> implements Comparable<AVLNode>{
 
 	private T contents;
-	private int balance;
 	private int branchSize;
 	private AVLNode<T> right;
 	private AVLNode<T> left;
 	
 	public AVLNode(T pContents) {
 		this.contents = pContents;
+		this.branchSize = 1;
 	}
 	
 	public T getContents() {
 		return contents;
-	}
-	
-	public int getBalance() {
-		return this.balance;
-	}
-	
-	public void setBalance(int pBalance) {
-		this.balance = pBalance;
 	}
 	
 	public int getBranchSize() {
@@ -38,11 +30,6 @@ public class AVLNode<T> implements Comparable<AVLNode>{
 	}
 
 	public void setRight(AVLNode<T> pRight) {
-//		if (this.right == null && pRight != null) {
-//			this.balance++;
-//		} else if(this.right != null && pRight == null) {
-//			this.balance--;
-//		}
 		this.right = pRight;
 	}
 
@@ -51,11 +38,6 @@ public class AVLNode<T> implements Comparable<AVLNode>{
 	}
 
 	public void setLeft(AVLNode<T> pLeft) {
-//		if (this.left == null && pLeft != null) {
-//			this.balance--;
-//		} else if(this.left != null && pLeft == null) {
-//			this.balance++;
-//		}
 		this.left = pLeft;
 	}
 
@@ -77,5 +59,4 @@ public class AVLNode<T> implements Comparable<AVLNode>{
 		}
 		return 0;
 	}
-
 }

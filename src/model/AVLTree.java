@@ -92,6 +92,26 @@ public class AVLTree<T> {
 		return pNode;
 	}
 	
+	public T get(T pContent) {
+		return get(pContent, this.root);
+	}
+	
+	private T get (T pContent, AVLNode<T> pNode) {
+		
+		if (pNode == null) {
+			return null;
+		}
+		
+		if(pNode.getContents().toString().compareTo(pContent.toString()) == 0) {
+			return pNode.getContents();
+		} else if(pNode.getContents().toString().compareTo(pContent.toString()) > 0) {
+			return get(pContent, pNode.getLeft());
+		} else{
+			return get(pContent, pNode.getRight());
+		}
+		
+	}
+	
 	private void printPreorder(AVLNode<T> pNode) {
 		if (pNode != null) {
 			System.out.println(pNode.toString());
@@ -110,6 +130,10 @@ public class AVLTree<T> {
 		avl.add("B");
 		avl.add("C");
 		avl.add("D");
-		avl.print();
+		avl.add("E");
+		avl.add("F");
+		//avl.print();
+		
+		System.out.println(avl.get("Z"));
 	}
 }
