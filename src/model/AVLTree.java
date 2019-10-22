@@ -22,9 +22,13 @@ public class AVLTree<T> {
 			pNode.setLeft(this.add(newNode, pNode.getLeft()));
 		} else if (newNode.compareTo(pNode) > 0) {
 			pNode.setRight(this.add(newNode, pNode.getRight()));
+		} else {
+			return pNode;
 		}
 		
-		return pNode;
+		pNode.setBranchSize(1 + Math.max(nodeSize(pNode.getLeft()), nodeSize(pNode.getRight())));
+	
+		return balance(pNode, newNode);
 	}
 	
 	private AVLNode<T> leftRotation(AVLNode<T> pNode){
@@ -33,9 +37,12 @@ public class AVLTree<T> {
 		pNode.setRight(temp.getLeft());
 		temp.setLeft(pNode);
 		
+		pNode.setBranchSize(1 + Math.max(nodeSize(pNode.getLeft()), nodeSize(pNode.getRight())));
+		temp.setBranchSize(1 + Math.max(nodeSize(temp.getLeft()), nodeSize(temp.getRight())));
 		
 		return temp;
 	}
+
 	
 	private AVLNode<T> rightRotation(AVLNode<T> pNode){
 		AVLNode<T> temp = pNode.getLeft();
@@ -43,10 +50,47 @@ public class AVLTree<T> {
 		pNode.setLeft(temp.getRight());
 		temp.setRight(pNode);
 		
+		pNode.setBranchSize(1 + Math.max(nodeSize(pNode.getLeft()), nodeSize(pNode.getRight())));
+		temp.setBranchSize(1 + Math.max(nodeSize(temp.getLeft()), nodeSize(temp.getRight())));
 		
 		return temp;
 	}
 	
+	private int nodeSize(AVLNode<T> pNode) {
+		if (pNode == null) {
+			return 0;
+		}
+		return pNode.getBranchSize();
+	}
+	
+	private AVLNode<T> balance(AVLNode<T> pNode, AVLNode<T> newNode){
+		
+		int nodeBalance;
+		
+		if (pNode == null) {
+			nodeBalance = 0;
+		}
+		
+		nodeBalance = nodeSize(pNode.getRight()) - nodeSize(pNode.getLeft());
+		
+		if (nodeBalance < -1) {
+			if (newNode.compareTo(pNode.getLeft()) < 0) { // Left Left Case
+		    	return rightRotation(pNode); 
+		    } else if (newNode.compareTo(pNode.getLeft()) > 0) { // Left Right Case 
+				pNode.setLeft(leftRotation(pNode.getLeft())); 
+				return rightRotation(pNode); 
+			} 
+		} else if(nodeBalance > 1) {
+			if (newNode.compareTo(pNode.getRight()) > 0) { // Right Right Case 
+				return leftRotation(pNode); 
+			} else if (newNode.compareTo(pNode.getRight()) > 0) { // Right Left Case 
+				pNode.setRight(rightRotation(pNode.getRight())); 
+				return leftRotation(pNode); 
+			} 
+		}
+		
+		return pNode;
+	}
 	
 	private void printPreorder(AVLNode<T> pNode) {
 		if (pNode != null) {
@@ -62,14 +106,10 @@ public class AVLTree<T> {
 	
 	public static void main(String[] args) {
 		AVLTree<String> avl = new AVLTree<String>();
-		avl.add("F");
-		avl.add("C");
-		avl.add("B");
-		avl.add("G");
-		avl.add("E");
 		avl.add("A");
-		avl.add("J");
+		avl.add("B");
 		avl.add("C");
+		avl.add("D");
 		avl.print();
 	}
 }
