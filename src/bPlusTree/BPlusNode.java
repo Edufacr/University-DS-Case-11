@@ -68,10 +68,16 @@ public class BPlusNode<K extends Comparable<K>,V> {
     public ArrayList<BPlusNode<K,V>> getChildren() {
         return children;
     }
-    public void addKey(K pKey,int pos){
-        getKeys().add(pos,pKey);
+    public void addKey(K pKey,int pPos){
+        getKeys().add(pPos,pKey);
     }
-    public void addValue(V pValue,int pos){
-        getValues().add(pos,pValue);
+    public void addValue(V pValue,int pPos){
+        getValues().add(pPos,pValue);
+    }
+    public void insertAt(int pPos,BPlusNode<K,V> pNode){
+        addKey(pNode.getKeys().get(0),pPos);
+        getChildren().set(pPos,pNode.getChildren().get(0));
+        getChildren().add(pPos+1,pNode.getChildren().get(1));
+        pNode = null;
     }
 }
