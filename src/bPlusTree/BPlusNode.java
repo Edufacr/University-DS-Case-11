@@ -27,6 +27,12 @@ public class BPlusNode<K extends Comparable<K>,V> {
         keys = pKeys;
         children = pChildren;
     }
+    BPlusNode(ArrayList<K> pKeys,ArrayList<V> pValues,BPlusNode<K,V> pNext){
+        IsLeaf = true;
+        keys = pKeys;
+        values = pValues;
+        next = pNext;
+    }
     BPlusNode(boolean pIsLeaf){
         if(pIsLeaf){
             this.values = new ArrayList<V>();
