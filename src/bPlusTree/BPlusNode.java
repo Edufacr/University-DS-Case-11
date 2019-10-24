@@ -80,4 +80,21 @@ public class BPlusNode<K extends Comparable<K>,V> {
         getChildren().add(pPos+1,pNode.getChildren().get(1));
         pNode = null;
     }
+    public BPlusNode<K,V> SearchKeyRange(K pLowerKey,K pHigherKey, ArrayList<V> pList){
+        K actualKey = null;
+        for(int keyIndex = 0; keyIndex < getKeys().size(); keyIndex++){
+            if(getKeys().get(keyIndex).compareTo(pLowerKey) >= 0 && (getKeys().get(keyIndex).compareTo(pHigherKey) <= 0 )){
+                actualKey = getKeys().get(keyIndex);
+                pList.add(getValues().get(keyIndex));
+            }
+        }
+        if(actualKey != null && actualKey.compareTo(pHigherKey) < 0){
+            return getNext();
+        }
+        return null;
+
+    }
+    public String toString(){
+        return getKeys().toString();
+    }
 }
