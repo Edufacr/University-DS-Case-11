@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class Word implements Comparable<Word> {
     private String word;
     private ArrayList<String> list;
-    Word(String pWord){
+    public Word(String pWord){
         word = pWord;
         list = new ArrayList<String>();
     }
-    Word(String pWord,String s){
+    public Word(String pWord,String s){
         word = pWord;
         list = new ArrayList<String>();
         list.add(s);
     }
-    Word(String pWord,ArrayList<String> s){
+    public Word(String pWord, ArrayList<String> s){
         word = pWord;
         list = s;
     }

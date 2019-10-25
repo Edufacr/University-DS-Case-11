@@ -11,7 +11,7 @@ public class SearchManager extends Observable {
     AVLTree<Word> wordTree;
     WebLoader loader;
 
-    SearchManager(AVLTree<Word> pWordTree){
+    public SearchManager(AVLTree<Word> pWordTree){
         wordTree = pWordTree;
     }
 
@@ -31,8 +31,8 @@ public class SearchManager extends Observable {
                     retList.add(wordTree.get(wordContainer).getList());
                 }
             }
-            //setChanged();
-            //notifyObservers(getIntersections(retList));
+            setChanged();
+            notifyObservers(getIntersections(retList));
             System.out.println(getIntersections(retList));
         }
     }
