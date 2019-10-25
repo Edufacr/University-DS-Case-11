@@ -11,8 +11,8 @@ public class SearchManager extends Observable {
     AVLTree<Word> wordTree;
     WebLoader loader;
 
-    SearchManager(){
-
+    SearchManager(AVLTree<Word> pWordTree){
+        wordTree = pWordTree;
     }
 
     public void searchWord(String pText){
@@ -20,15 +20,24 @@ public class SearchManager extends Observable {
             ArrayList<ArrayList<String>> retList = new ArrayList<ArrayList<String>>();
             Word wordContainer = new Word("");
             String[] words = parseWords(pText);
+            Word retWord;
             for (String word: words) {
                 wordContainer.setWord(word);
-                retList.add(wordTree.get(wordContainer).getList());
+                retWord = wordTree.get(wordContainer);
+                if(retWord == null){
+                    retList.add(null);
+                }
+                else{
+                    retList.add(wordTree.get(wordContainer).getList());
+                }
             }
-            setChanged();
-            notifyObservers(getIntersections(retList));
+            //setChanged();
+            //notifyObservers(getIntersections(retList));
+            System.out.println(getIntersections(retList));
         }
     }
     private String[] parseWords(String pText){
+        pText = pText.toLowerCase();
         String delims = "[ ]+";
         return pText.split(delims);
     }
@@ -37,7 +46,7 @@ public class SearchManager extends Observable {
             return new ArrayList<String>();
         }
         else{
-            ArrayList<String> ret = new ArrayList<String>();
+            ArrayList<String> ret = pList.get(0);
             for (int pListIndex = 1; pListIndex < pList.size();pListIndex++){
                 ret = intersection(ret,pList.get(pListIndex));
             }
@@ -56,5 +65,19 @@ public class SearchManager extends Observable {
         return ret;
     }
 
+    public static void main(String[] args) {
+        AVLTree<Word> wordTree = new AVLTree<Word>();
+        ArrayList<String> s1 = new ArrayList<String>();
+        ArrayList<String> s2 = new ArrayList<String>();
+        s1.add("A");
+        s1.add("B");
+        s2.add("A");
+        s2.add("B");
+        wordTree.add(new Word("hola",s1));
+        wordTree.add(new Word("buenas",s2));
+        wordTree.add(new Word("adios","C"));
+        SearchManager manager = new SearchManager(wordTree);
+        manager.searchWord("Hola lol");
+    }
 
 }
