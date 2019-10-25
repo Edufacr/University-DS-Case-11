@@ -83,7 +83,7 @@ public class AVLTree<T extends Comparable<T>> {
 		} else if(nodeBalance > 1) {
 			if (newNode.compareTo(pNode.getRight()) > 0) { // Right Right Case 
 				return leftRotation(pNode); 
-			} else if (newNode.compareTo(pNode.getRight()) > 0) { // Right Left Case 
+			} else if (newNode.compareTo(pNode.getRight()) < 0) { // Right Left Case
 				pNode.setRight(rightRotation(pNode.getRight())); 
 				return leftRotation(pNode); 
 			} 
