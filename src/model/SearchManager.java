@@ -64,7 +64,12 @@ public class SearchManager extends Observable {
         }
         return ret;
     }
+    void searchRange(String pText){
 
+    }
+    void searchDomain(String pText){
+        
+    }
     public static void main(String[] args) {
         AVLTree<Word> wordTree = new AVLTree<Word>();
         ArrayList<String> s1 = new ArrayList<String>();
