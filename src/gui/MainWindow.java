@@ -53,19 +53,19 @@ public class MainWindow extends JFrame implements Observer {
         domainSearchButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                manager.searchWord(textField.getText());
+                manager.searchDomain(textField.getText());
             }
         };
         wordSearchButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                manager.searchWord(textField.getText());
             }
         };
         rangeSearchButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                manager.searchRange(textField.getText());
             }
         };
 
