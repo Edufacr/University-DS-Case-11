@@ -1,43 +1,39 @@
-/*package model;
+package model;
 
 import java.util.ArrayList;
 
-public class TreeManager {
+public class TreeLoader {
 	
 	private JsonManager json;
 	private WebScrapper web;
 	
-	public TreeManager(){
+	public TreeLoader(){
 		this.json = JsonManager.getInstance();
 		this.web = WebScrapper.getInstance();
-		scrapWeb();
 	}
 	
-	private void scrapWeb() {
+	public void loadTrees() {
+		int width = this.json.getWidth();
 		int depth = this.json.getDepth();
-		int count = 0;
-		ArrayList<String> finalUrl = new ArrayList<String>();
-		finalUrl.addAll(this.json.getUrls());
-		ArrayList<String> temp = new ArrayList<String>();
-		
-		for (String url : finalUrl) {
-			temp = loadURLs(temp, url, count, depth);
-			finalUrl.addAll(temp);
-			temp.clear();
-		}
-		System.out.println(finalUrl);
+		this.loadTrees(this.json.getUrls(), width, depth);
 	}
 	
-	private ArrayList<String> loadURLs(ArrayList<String> pArray, String pUrl, int pCount, int pDepth){
-		if (pCount < pDepth) {
-			return loadURLs(pArray, pUrl, pCount++, pDepth);
+	private void loadTrees(ArrayList<String> pUrls, int pWidth, int pDepth) {
+		if (pDepth == 0) {
+			return;
 		}
-		this.web.scrapUrl(pUrl, this.json.getWidth());
-		return pArray;
+		
+		for (String url : pUrls) {
+			System.out.println(url);
+			this.web.scrapUrl(url, pWidth);
+			// load trees here
+		}
+		
+		loadTrees(this.web.getUrls(), pWidth, --pDepth);
 	}
 	
 	public static void main(String[] args) {
-		TreeManager tm = new TreeManager();
+		TreeLoader tm = new TreeLoader();
+		tm.loadTrees();
 	}
-	}
- */
+}

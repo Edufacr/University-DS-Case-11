@@ -50,7 +50,7 @@ public class WebScrapper {
 	        }
 	        
 	        // parses html String to a doc using Jsoup
-	        Document doc = Jsoup.parse(html); 
+	        Document doc = Jsoup.parse(html);
 	        
 	        // extracts indicated amount of urls from doc
 	        Elements elts = doc.getElementsByTag("a");
@@ -80,9 +80,11 @@ public class WebScrapper {
 	        }
 	        
 	    } catch (MalformedURLException e) {
-	    	e.printStackTrace();
-	    } catch (IOException e) {
-	    	e.printStackTrace();
+	    	System.out.println(e.getMessage());
+	    } catch (org.jsoup.UncheckedIOException e) {
+        	System.out.println(e.getMessage());
+        } catch (IOException e) {
+        	System.out.println(e.getMessage());
 	    }
 	}
 	
