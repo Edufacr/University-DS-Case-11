@@ -34,10 +34,4 @@ public class TreeLoader {
 		
 		loadTrees(this.web.getUrls(), pWidth, --pDepth);
 	}
-	
-	public static void main(String[] args) {
-		TreeLoader tm = new TreeLoader();
-		tm.loadTrees();
-		System.out.println("Listo");
-	}
 }
