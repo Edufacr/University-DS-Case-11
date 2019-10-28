@@ -6,6 +6,7 @@ public class BPlusTree<K extends Comparable<K>,V> {
     private int order;
     private BPlusNode<K,V> root;
     private BPlusNode<K,V> first;
+    private int comparisons;
 
     public BPlusTree(int pOrder){
         order = pOrder;
@@ -94,6 +95,7 @@ public class BPlusTree<K extends Comparable<K>,V> {
         pEnd.subList(0,pMedian+1).clear();
     }
     public BPlusNode<K,V> searchNode(K pKey){
+    	this.comparisons = 0;
         return searchNode(pKey,getRoot());
     }
     private BPlusNode<K,V> searchNode(K pKey,BPlusNode<K,V> pRoot){
@@ -101,12 +103,14 @@ public class BPlusTree<K extends Comparable<K>,V> {
             return pRoot;
         }
         else {
+        	this.comparisons++;
             return searchInnerNode(pKey,pRoot);
         }
     }
     private BPlusNode<K,V>searchInnerNode(K pKey, BPlusNode<K,V> pRoot){
         for (int keyIndex = 0; keyIndex <= pRoot.getKeys().size();keyIndex++){
             if(keyIndex == pRoot.getKeys().size() || pKey.compareTo(pRoot.getKeys().get(keyIndex)) < 0){
+            	this.comparisons++;
                 return searchNode(pKey,pRoot.getChildren().get(keyIndex));
             }
         }
@@ -120,6 +124,9 @@ public class BPlusTree<K extends Comparable<K>,V> {
         }
         return array;
 
+    }
+    public int getComparisons() {
+    	return this.comparisons;
     }
     public String toString(){
         BPlusNode<K,V> tmp = first;
