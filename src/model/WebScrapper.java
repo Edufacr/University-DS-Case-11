@@ -35,7 +35,6 @@ public class WebScrapper {
 	
 	public void scrapUrl(String pUrl, int pWidth) {
 		this.words.clear();
-		this.urls.clear();
 		try {
 	        // Create a URL for the desired website
 	        URL url = new URL(pUrl);       
@@ -57,14 +56,15 @@ public class WebScrapper {
 	        Elements elts = doc.getElementsByTag("a");
 	        Iterator<?> it = elts.iterator();
 	        
-	        
+	        int urlCount = 0;
 	        while(it.hasNext()) {
 	        	String next = it.next().toString();
 	        	String[] splits = next.split("\"");
 	        	if (next.contains("https://") && splits.length > 1) {	        		
 	        		for (String s : splits) {
-	        			if (isUrl(s) && urls.size() < pWidth) {
+	        			if (isUrl(s) && urlCount < pWidth) {
 	        				urls.add(s.toString());
+	        				urlCount++;
 	        			}
 	        		}
 	        	}
@@ -95,7 +95,10 @@ public class WebScrapper {
 	}
 	
 	public ArrayList<String> getUrls(){
-		return this.urls;
+		ArrayList<String> depthUrls = new ArrayList<String>();
+		depthUrls.addAll(this.urls);
+		this.urls.clear();
+		return depthUrls;
 	}
 	
 	private boolean isUrl(String pUrl) {
