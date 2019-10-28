@@ -9,12 +9,13 @@ public class SearchManager extends Observable {
     private BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
     private AVLTree<Word> urlTree;
     private AVLTree<Word> wordTree;
-    WebLoader loader;
+    private int indexedWords;
 
-    public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree){
+    public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree,int pIndexedWords){
         wordTree = pWordTree;
         wordsOccurrenceTree = pOccurrenceTree;
         urlTree = pUrlTree;
+        indexedWords = pIndexedWords;
     }
 
     public void searchWord(String pText){
