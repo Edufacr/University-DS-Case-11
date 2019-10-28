@@ -21,6 +21,9 @@ public class TreeLoader {
 		this.json = JsonManager.getInstance();
 		this.web = WebScrapper.getInstance();
 		wordsIndexed = 0;
+		wordsOccurrenceTree = new BPlusTree<Integer, ArrayList<String>>(4);
+		urlTree = new AVLTree<Word>();
+		wordTree = new AVLTree<Word>();
 	}
 	
 	public void loadTrees() {
@@ -108,7 +111,23 @@ public class TreeLoader {
 		}
 		urlTree.add(new Word(pUrl,topFive));
 	}
-	
+
+	public BPlusTree<Integer, ArrayList<String>> getWordsOccurrenceTree() {
+		return wordsOccurrenceTree;
+	}
+
+	public AVLTree<Word> getUrlTree() {
+		return urlTree;
+	}
+
+	public AVLTree<Word> getWordTree() {
+		return wordTree;
+	}
+
+	public int getWordsIndexed() {
+		return wordsIndexed;
+	}
+
 	public static void main(String[] args) {
 		TreeLoader tm = new TreeLoader();
 		tm.loadTrees();
