@@ -105,7 +105,7 @@ public class MainWindow extends JFrame implements Observer {
         wordTree.add(new Word("hola",s1));
         wordTree.add(new Word("buenas",s2));
         wordTree.add(new Word("adios","C"));
-        MainWindow w = new MainWindow("Hola",new SearchManager(wordTree));
+        //MainWindow w = new MainWindow("Hola",new SearchManager(wordTree));
     }
 
     @Override
