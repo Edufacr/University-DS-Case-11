@@ -64,10 +64,10 @@ public class SearchManager extends Observable {
         }
         return ret;
     }
-    void searchRange(String pText){
+    public void searchRange(String pText){
 
     }
-    void searchDomain(String pText){
+    public void searchDomain(String pText){
         
     }
     public static void main(String[] args) {
