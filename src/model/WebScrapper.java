@@ -34,6 +34,8 @@ public class WebScrapper {
 	}
 	
 	public void scrapUrl(String pUrl, int pWidth) {
+		this.words.clear();
+		this.urls.clear();
 		try {
 	        // Create a URL for the desired website
 	        URL url = new URL(pUrl);       
