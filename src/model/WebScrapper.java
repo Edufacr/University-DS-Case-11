@@ -109,11 +109,4 @@ public class WebScrapper {
 		Matcher matcher = pattern.matcher(pWord);
 		return matcher.matches();
 	}
-	
-	public static void main(String[] args) {
-		WebScrapper ws = WebScrapper.getInstance();
-		ws.scrapUrl("https://en.wikipedia.org/wiki/Main_Page", 4);
-		System.out.println(ws.getWords());
-	}
-	
 }
