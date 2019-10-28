@@ -1,4 +1,4 @@
-/*package model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,7 +23,6 @@ public class JsonManager implements IConstants{
 		try {
 			this.loadJson(JSON_PATH);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -59,13 +58,10 @@ public class JsonManager implements IConstants{
 			
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -82,4 +78,4 @@ public class JsonManager implements IConstants{
 		return this.urls;
 	}
 }
-*/
+
