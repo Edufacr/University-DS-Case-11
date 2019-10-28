@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.util.ArrayList;
 
@@ -39,4 +39,5 @@ public class TreeManager {
 	public static void main(String[] args) {
 		TreeManager tm = new TreeManager();
 	}
-}
+	}
+ */

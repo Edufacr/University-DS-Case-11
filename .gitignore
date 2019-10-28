@@ -1,3 +1,6 @@
+#mias
+.idea/
+University-DS-Case-11.iml
 # Compiled class file
 *.class
 
@@ -195,3 +198,11 @@ fabric.properties
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+University-DS-Case-11.iml

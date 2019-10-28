@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -113,3 +113,4 @@ public class WebScrapper {
 		return this.urls;
 	}
 }
+*/

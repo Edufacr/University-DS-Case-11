@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -82,4 +82,4 @@ public class JsonManager implements IConstants{
 		return this.urls;
 	}
 }
-
+*/

@@ -1,6 +1,6 @@
 package model;
 
-public class AVLTree<T> {
+public class AVLTree<T extends Comparable<T>> {
 	private AVLNode<T> root;
 	
 	public AVLTree() {}
@@ -83,7 +83,7 @@ public class AVLTree<T> {
 		} else if(nodeBalance > 1) {
 			if (newNode.compareTo(pNode.getRight()) > 0) { // Right Right Case 
 				return leftRotation(pNode); 
-			} else if (newNode.compareTo(pNode.getRight()) > 0) { // Right Left Case 
+			} else if (newNode.compareTo(pNode.getRight()) < 0) { // Right Left Case
 				pNode.setRight(rightRotation(pNode.getRight())); 
 				return leftRotation(pNode); 
 			} 
@@ -102,9 +102,9 @@ public class AVLTree<T> {
 			return null;
 		}
 		
-		if(pNode.getContents().toString().compareTo(pContent.toString()) == 0) {
+		if(pNode.getContents().compareTo(pContent) == 0) {
 			return pNode.getContents();
-		} else if(pNode.getContents().toString().compareTo(pContent.toString()) > 0) {
+		} else if(pNode.getContents().compareTo(pContent) > 0) {
 			return get(pContent, pNode.getLeft());
 		} else{
 			return get(pContent, pNode.getRight());
@@ -134,6 +134,6 @@ public class AVLTree<T> {
 		avl.add("F");
 		//avl.print();
 		
-		System.out.println(avl.get("Z"));
+		System.out.println(avl.get("A"));
 	}
 }

@@ -1,7 +1,7 @@
 package model;
 
 
-public class AVLNode<T> implements Comparable<AVLNode>{
+public class AVLNode<T extends Comparable<T>> implements Comparable<AVLNode<T>>{
 
 	private T contents;
 	private int branchSize;
@@ -47,14 +47,14 @@ public class AVLNode<T> implements Comparable<AVLNode>{
 	}
 
 	@Override
-	public int compareTo(AVLNode pOtherNode) {
+	public int compareTo(AVLNode<T> pOtherNode) {
 		if (pOtherNode == null) {
 			return 1;
 		}
-		
-		if (this.toString().compareTo(pOtherNode.toString()) < 0) {
+
+		if (getContents().compareTo(pOtherNode.getContents()) < 0) {
 			return -1;
-		} else if (this.toString().compareTo(pOtherNode.toString()) > 0) {
+		} else if (getContents().compareTo(pOtherNode.getContents()) > 0) {
 			return 1;
 		}
 		return 0;
