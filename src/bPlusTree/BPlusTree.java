@@ -18,6 +18,17 @@ public class BPlusTree<K extends Comparable<K>,V> {
     public void setRoot(BPlusNode root) {
         this.root = root;
     }
+    public BPlusNode getFirst(){
+        return getFirst(root);
+    }
+    public BPlusNode getFirst(BPlusNode<K,V> pNode){
+        if(pNode.isLeaf()){
+            return pNode;
+        }
+        else{
+            return getFirst(pNode.getChildren().get(0));
+        }
+    }
     public void add(K pKey, V pValue){
         root = add(pKey,pValue,root);
     }
@@ -119,7 +130,15 @@ public class BPlusTree<K extends Comparable<K>,V> {
             node = node.SearchKeyRange(pLowerKey,pHigherKey,array);
         }
         return array;
-
+    }
+    public V searchValue(K pKey){
+        BPlusNode<K,V> node = searchNode(pKey);
+        for (int keyIndex = 0; keyIndex < node.getKeys().size(); keyIndex++){
+            if(node.getKeys().get(keyIndex).compareTo(pKey) == 0){
+                return node.getValues().get(keyIndex);
+            }
+        }
+        return null;
     }
     public String toString(){
         BPlusNode<K,V> tmp = first;
@@ -132,11 +151,10 @@ public class BPlusTree<K extends Comparable<K>,V> {
     }
 
     public static void main(String[] args) {
-        BPlusTree<Integer,String> tree = new BPlusTree<Integer,String>(4);
+        BPlusTree<Integer,Integer> tree = new BPlusTree<Integer,Integer>(4);
         for (Integer i = 0; i<16;i++){
-            tree.add(i,i.toString());
+            tree.add(i,i);
         }
-        tree.add(0,"cero");
         System.out.println(tree.toString());
         System.out.println(tree.searchKeyRange(4,10).toString());
     }
