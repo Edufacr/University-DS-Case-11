@@ -2,8 +2,11 @@ package model;
 
 public class AVLTree<T extends Comparable<T>> {
 	private AVLNode<T> root;
+	private int comparisons;
 	
-	public AVLTree() {}
+	public AVLTree() {
+		this.comparisons = 0;
+	}
 	
 	public void add(T pContent) {
 		if (this.root == null) {
@@ -93,6 +96,7 @@ public class AVLTree<T extends Comparable<T>> {
 	}
 	
 	public T get(T pContent) {
+		this.comparisons = 0;
 		return get(pContent, this.root);
 	}
 	
@@ -102,6 +106,8 @@ public class AVLTree<T extends Comparable<T>> {
 			return null;
 		}
 		
+		this.comparisons++;
+		
 		if(pNode.getContents().compareTo(pContent) == 0) {
 			return pNode.getContents();
 		} else if(pNode.getContents().compareTo(pContent) > 0) {
@@ -110,6 +116,10 @@ public class AVLTree<T extends Comparable<T>> {
 			return get(pContent, pNode.getRight());
 		}
 		
+	}
+	
+	public int getComparisons() {
+		return this.comparisons;
 	}
 	
 	private void printPreorder(AVLNode<T> pNode) {
@@ -122,18 +132,5 @@ public class AVLTree<T extends Comparable<T>> {
 	
 	public void print() {
 		printPreorder(this.root);
-	}
-	
-	public static void main(String[] args) {
-		AVLTree<String> avl = new AVLTree<String>();
-		avl.add("A");
-		avl.add("B");
-		avl.add("C");
-		avl.add("D");
-		avl.add("E");
-		avl.add("F");
-		//avl.print();
-		
-		System.out.println(avl.get("A"));
 	}
 }
