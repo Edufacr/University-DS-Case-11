@@ -1,4 +1,4 @@
-/*package model;
+package model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.net.URLConnection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -51,15 +53,15 @@ public class WebScrapper {
 	        
 	        // extracts indicated amount of urls from doc
 	        Elements elts = doc.getElementsByTag("a");
-	        Iterator it = elts.iterator();
+	        Iterator<?> it = elts.iterator();
 	        
 	        
 	        while(it.hasNext()) {
 	        	String next = it.next().toString();
 	        	String[] splits = next.split("\"");
-	        	if (next.contains("https://") && splits.length >1) {	        		
+	        	if (next.contains("https://") && splits.length > 1) {	        		
 	        		for (String s : splits) {
-	        			if (s.contains("https://") && urls.size() < pWidth) {
+	        			if (isUrl(s) && urls.size() < pWidth) {
 	        				urls.add(s.toString());
 	        			}
 	        		}
@@ -69,30 +71,11 @@ public class WebScrapper {
 	        
 	        // extracts words from doc
 	        String text = doc.body().text();
-	        for (String s : text.split(" ")) {
-
-	        	if (s.contains(".")) {
-	        		s = s.replace(".", "");
-	        	} 
-	        	if(s.contains(",")) {
-	        		s = s.replace(",", "");
+	        for (String s : text.split("\\W+")) {
+	        	if (isUseful(s) && s.length() > 4){
+	        		words.add(s.toLowerCase());
 	        	}
-	        	if(s.contains("?")) {
-	        		s = s.replace("?", "");
-	        	}
-	        	if(s.contains("!")) {
-	        		s = s.replace("!", "");
-	        	}
-	        	if(s.contains(")")) {
-	        		s = s.replace(")", "");
-	        	}
-	        	if(s.contains("(")) {
-	        		s = s.replace("(", "");
-	        	}
-	        	words.add(s);
 	        }
-	        
-	         
 	        
 	    } catch (MalformedURLException e) {
 	    	e.printStackTrace();
@@ -112,5 +95,25 @@ public class WebScrapper {
 	public ArrayList<String> getUrls(){
 		return this.urls;
 	}
+	
+	private boolean isUrl(String pUrl) {
+		String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(pUrl);
+		return matcher.matches();
+	}
+	
+	private boolean isUseful(String pWord) {
+		String regex = "^[a-zA-Z]+$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(pWord);
+		return matcher.matches();
+	}
+	
+	public static void main(String[] args) {
+		WebScrapper ws = WebScrapper.getInstance();
+		ws.scrapUrl("https://en.wikipedia.org/wiki/Main_Page", 4);
+		System.out.println(ws.getWords());
+	}
+	
 }
-*/
