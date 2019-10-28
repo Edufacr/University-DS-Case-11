@@ -91,21 +91,7 @@ public class MainWindow extends JFrame implements Observer {
     }
 
     public static void main(String[] args) {
-        AVLTree<Word> wordTree = new AVLTree<Word>();
-        ArrayList<String> s1 = new ArrayList<String>();
-        ArrayList<String> s2 = new ArrayList<String>();
-        s1.add("A");
-        s1.add("B");
-        s1.add("A");
-        s1.add("B");
-        s1.add("A");
-        s1.add("B");
-        s1.add("A");
-        s1.add("B");
-        wordTree.add(new Word("hola",s1));
-        wordTree.add(new Word("buenas",s2));
-        wordTree.add(new Word("adios","C"));
-        MainWindow w = new MainWindow("Hola",new SearchManager(wordTree));
+
     }
 
     @Override
