@@ -7,13 +7,14 @@ import java.util.Observable;
 
 public class SearchManager extends Observable {
     BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
-    AVLTree<String> urlTree;
+    AVLTree<Word> urlTree;
     AVLTree<Word> wordTree;
     WebLoader loader;
 
-    public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree){
+    public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree){
         wordTree = pWordTree;
         wordsOccurrenceTree = pOccurrenceTree;
+        urlTree = pUrlTree;
     }
 
     public void searchWord(String pText){
@@ -99,22 +100,24 @@ public class SearchManager extends Observable {
         return ret;
     }
     public void searchDomain(String pText){
-        
+        if(!pText.isEmpty()){
+            ArrayList<String> retList = new ArrayList<String>();
+            String[] words = parseWords(pText);
+            Word wordContainer = new Word(words[0]);
+            Word retWord;
+            retWord = urlTree.get(wordContainer);
+            if(retWord == null){
+                retList.add(null);
+            }
+            else{
+                retList.addAll(retWord.getList());
+            }
+            setChanged();
+            notifyObservers(retList);
+        }
     }
     public static void main(String[] args) {
-        AVLTree<Word> wordTree = new AVLTree<Word>();
-        BPlusTree<Integer, ArrayList<String>> tree = new BPlusTree<Integer, ArrayList<String>>(4);
-        ArrayList<String> uno = new ArrayList<String>();
-        uno.add("hola");
-        uno.add("adios");
-        uno.add("jeje");
-        ArrayList<String> dos = new ArrayList<String>();
-        dos.add("hello");
-        dos.add("bye");
-        dos.add("hehe");
-        tree.add(2,dos);
-        tree.add(1,uno);
-        SearchManager manager = new SearchManager(wordTree,tree);
+
 
     }
 
