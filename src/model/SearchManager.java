@@ -9,7 +9,7 @@ public class SearchManager extends Observable {
     BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
     AVLTree<String> urlTree;
     AVLTree<Word> wordTree;
-    WebLoader loader;
+    TreeLoader loader;
 
     public SearchManager(AVLTree<Word> pWordTree){
         wordTree = pWordTree;
