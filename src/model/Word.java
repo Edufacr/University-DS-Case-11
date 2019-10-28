@@ -34,4 +34,8 @@ public class Word implements Comparable<Word> {
     public void setWord(String word) {
         this.word = word;
     }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
+    }
 }
