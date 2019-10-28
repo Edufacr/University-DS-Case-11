@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class SearchManager extends Observable {
-    BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
-    AVLTree<Word> urlTree;
-    AVLTree<Word> wordTree;
+    private BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
+    private AVLTree<Word> urlTree;
+    private AVLTree<Word> wordTree;
     WebLoader loader;
 
     public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree){
