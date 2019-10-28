@@ -15,7 +15,7 @@ public class TreeLoader {
 	public void loadTrees() {
 		int width = this.json.getWidth();
 		int depth = this.json.getDepth();
-		this.loadTrees(this.json.getUrls(), width, depth);
+		this.loadTrees(this.json.getUrls(), width, depth-1);
 	}
 	
 	private void loadTrees(ArrayList<String> pUrls, int pWidth, int pDepth) {
@@ -24,9 +24,12 @@ public class TreeLoader {
 		}
 		
 		for (String url : pUrls) {
-			System.out.println(url);
+			try {
 			this.web.scrapUrl(url, pWidth);
 			// load trees here
+			} catch(org.jsoup.UncheckedIOException e) {
+				continue;
+			}
 		}
 		
 		loadTrees(this.web.getUrls(), pWidth, --pDepth);
@@ -35,5 +38,6 @@ public class TreeLoader {
 	public static void main(String[] args) {
 		TreeLoader tm = new TreeLoader();
 		tm.loadTrees();
+		System.out.println("Listo");
 	}
 }
