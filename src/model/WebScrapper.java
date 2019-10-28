@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
+import org.jsoup.UncheckedIOException;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -33,7 +34,7 @@ public class WebScrapper {
 		return singleton;
 	}
 	
-	public void scrapUrl(String pUrl, int pWidth) {
+	public void scrapUrl(String pUrl, int pWidth) throws UncheckedIOException{
 		this.words.clear();
 		try {
 	        // Create a URL for the desired website
@@ -62,7 +63,10 @@ public class WebScrapper {
 	        	String[] splits = next.split("\"");
 	        	if (next.contains("https://") && splits.length > 1) {	        		
 	        		for (String s : splits) {
-	        			if (isUrl(s) && urlCount < pWidth) {
+	        			if (urlCount == pWidth) {
+	        				break;
+	        			}
+	        			if (isUrl(s)) {
 	        				urls.add(s.toString());
 	        				urlCount++;
 	        			}
@@ -80,11 +84,9 @@ public class WebScrapper {
 	        }
 	        
 	    } catch (MalformedURLException e) {
-	    	System.out.println(e.getMessage());
-	    } catch (org.jsoup.UncheckedIOException e) {
-        	System.out.println(e.getMessage());
+	    	System.out.println("Ignoring url: " + e.getMessage());
         } catch (IOException e) {
-        	System.out.println(e.getMessage());
+        	System.out.println("Ignoring url: " + e.getMessage());
 	    }
 	}
 	
