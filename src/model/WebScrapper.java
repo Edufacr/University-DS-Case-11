@@ -23,7 +23,9 @@ public class WebScrapper {
 	private ArrayList<String> urls;
 	
 	private WebScrapper() {
-		this.words = new ArrayList<String>();
+		ArrayList<String> array = new ArrayList<String>();
+		array.add("hola");
+		this.words = array;
 		this.urls = new ArrayList<String>();
 	}
 	

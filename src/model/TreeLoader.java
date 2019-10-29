@@ -38,9 +38,12 @@ public class TreeLoader {
 		}
 		for (String url : pUrls) {
 			try {
-			this.web.scrapUrl(url, pWidth);
-			insertIntoTrees(organizeWords(web.getWords()),url);
-			// load trees here
+				if(urlTree.get(new Word(url)) == null){
+					this.web.scrapUrl(url, pWidth);
+					if(!web.getWords().isEmpty()){
+						insertIntoTrees(organizeWords(web.getWords()),url);
+					}
+				}
 			} catch(org.jsoup.UncheckedIOException e) {
 				continue;
 			}
@@ -49,6 +52,7 @@ public class TreeLoader {
 		loadTrees(this.web.getUrls(), pWidth, --pDepth);
 	}
 	private BPlusTree<String,int[]> organizeWords(ArrayList<String> pWords){
+		System.out.println(pWords.toString());
 		BPlusTree<String,int[]> tree = new BPlusTree<String, int[]>(4);
 		for (String word:pWords
 			 ) {
@@ -112,6 +116,9 @@ public class TreeLoader {
 		pList.sort(Collections.reverseOrder());
 		ArrayList<String> topFive = new ArrayList<String>();
 		for (int index = 0; index<5;index++){
+			if(index >= pList.size()){
+				break;
+			}
 			topFive.add(pList.get(index).getWord());
 		}
 		urlTree.add(new Word(pUrl,topFive));
