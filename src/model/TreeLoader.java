@@ -36,7 +36,6 @@ public class TreeLoader {
 		if (pDepth == 0) {
 			return;
 		}
-		
 		for (String url : pUrls) {
 			try {
 			this.web.scrapUrl(url, pWidth);
@@ -68,6 +67,8 @@ public class TreeLoader {
 
 	private void insertIntoTrees(BPlusTree<String,int[]> pWords, String pUrl){
 		BPlusNode<String,int[]> node = pWords.getFirst();
+		System.out.println(pUrl);
+		System.out.println(pWords.toString());
 		ArrayList<WordOccurrenceContainer> list = new ArrayList<WordOccurrenceContainer>();
 		String word;
 		int occurrence;
@@ -79,8 +80,8 @@ public class TreeLoader {
 				insertIntoWordTree(word,pUrl);
 				insertIntoOccurrenceTree(occurrence,pUrl);
 				list.add(new WordOccurrenceContainer(occurrence,word));
-				node = node.getNext();
 			}
+			node = node.getNext();
 		}
 		insertIntoURL(pUrl,list);
 	}

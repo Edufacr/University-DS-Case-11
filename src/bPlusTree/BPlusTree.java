@@ -148,10 +148,10 @@ public class BPlusTree<K extends Comparable<K>,V> {
     	return this.comparisons;
     }
     public String toString(){
-        BPlusNode<K,V> tmp = first;
+        BPlusNode<K,V> tmp = getFirst();
         String ret = "";
         while(tmp != null){
-            ret = ret + tmp.getValues().toString();
+            ret = ret + tmp.getKeys().toString();
             tmp = tmp.getNext();
         }
         return ret;
