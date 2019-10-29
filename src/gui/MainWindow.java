@@ -85,7 +85,10 @@ public class MainWindow extends JFrame implements Observer {
         buttonPanel.add(wordSearchButton);
 
         percentage = new JLabel("Percentage");
-        buttonPanel.add(percentage);
+        ScrollPane pane = new ScrollPane();
+        pane.add(percentage);
+        add(pane);
+       // buttonPanel.add(percentage);
         return buttonPanel;
     }
     private JScrollPane CreateScrollArea(){
@@ -110,7 +113,9 @@ public class MainWindow extends JFrame implements Observer {
             label.setPreferredSize(labelDim);
             mainPanel.add(new JLabel(text));
         }
-        String toShow = "Comparisons:"+Integer.toString(manager.getComparisons()) + " Total:"+Integer.toString(manager.getIndexedWords());
+        String toShow = "Comparisons: "+Integer.toString(manager.getComparisons()) + "" +
+                " Total Words: "+Integer.toString(manager.getIndexedWords())+
+                "\n"+" URLTreeNodes: "+Integer.toString(manager.getUrlTreeSize())+"\n"+" OccurrenceTreeNodes: "+Integer.toString(manager.getOccurrencesTreeSize())+"\n"+" WordTreeNodes: "+Integer.toString(manager.getWordsTreeSize());
         this.percentage.setText(toShow);
         mainPanel.revalidate();
     }

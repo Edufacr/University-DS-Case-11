@@ -11,12 +11,17 @@ public class SearchManager extends Observable implements IConstants {
     private AVLTree<Word> wordTree;
     private int indexedWords;
     private int comparisons;
-    private int treeSize;
+    private int urlTreeSize;
+    private int wordsTreeSize;
+    private int occurrencesTreeSize;
 
     public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree,int pIndexedWords){
         wordTree = pWordTree;
+        wordsTreeSize = wordTree.getSize();
         wordsOccurrenceTree = pOccurrenceTree;
+        occurrencesTreeSize = wordsOccurrenceTree.getSize();
         urlTree = pUrlTree;
+        urlTreeSize = urlTree.getSize();
         indexedWords = pIndexedWords;
     }
 
@@ -136,4 +141,15 @@ public class SearchManager extends Observable implements IConstants {
 
     }
 
+    public int getUrlTreeSize() {
+        return urlTreeSize;
+    }
+
+    public int getWordsTreeSize() {
+        return wordsTreeSize;
+    }
+
+    public int getOccurrencesTreeSize() {
+        return occurrencesTreeSize;
+    }
 }

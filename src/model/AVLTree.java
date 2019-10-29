@@ -129,6 +129,15 @@ public class AVLTree<T extends Comparable<T>> {
 			printPreorder(pNode.getRight());
 		}
 	}
+	public int getSize(){
+		return getSize(root);
+	}
+	private int getSize(AVLNode<T> pRoot){
+		if(pRoot != null){
+			return 1+getSize(pRoot.getLeft()) + getSize(pRoot.getRight());
+		}
+		return 0;
+	}
 	
 	public void print() {
 		printPreorder(this.root);

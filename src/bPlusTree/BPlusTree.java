@@ -157,7 +157,21 @@ public class BPlusTree<K extends Comparable<K>,V> {
         }
         return ret;
     }
+    public int getSize(){
+        int[] ret = new int[1];
+        getSize(getRoot(),ret);
+        return ret[0];
+    }
+    public void getSize(BPlusNode<K,V> pRoot, int[]pNum){
+        pNum[0]++;
+        if(!pRoot.isLeaf()){
+            for (BPlusNode<K,V> node:
+                    pRoot.getChildren()) {
+                getSize(node,pNum);
+            }
+        }
 
+    }
     public static void main(String[] args) {
         BPlusTree<Integer,Integer> tree = new BPlusTree<Integer,Integer>(4);
 //        for (Integer i = 0; i<16;i++){
