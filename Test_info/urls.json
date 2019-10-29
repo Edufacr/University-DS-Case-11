@@ -1,13 +1,12 @@
 {
-	"anchura" : 4,
-	"profundidad" : 3,
+	"anchura" : 3,
+	"profundidad" : 2,
 	"urls" :
 	[
 		"https://en.wikipedia.org/wiki/Wikipedia",
 		"https://www.regular-expressions.info/engine.html",
 		"https://www.forbes.com/sites/jaymcgregor/2019/10/26/googles-pixel-buds-2-release-in-2020-heres-what-they-need/#57177c27da33",
 		"https://www.nytimes.com/2019/10/03/movies/joker-review.html",
-		"https://www.wsj.com/articles/chile-protesters-grievances-shift-to-inequality-rattling-government-11572215166",
-		"https://en.wikipedia.org/wiki/Main_Page"
+		"https://www.wsj.com/articles/chile-protesters-grievances-shift-to-inequality-rattling-government-11572215166"
 	]
 }
