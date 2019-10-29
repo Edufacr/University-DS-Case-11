@@ -109,7 +109,9 @@ public class TreeLoader {
 			wordsOccurrenceTree.add(pOccurrence,urlList);
 		}
 		else {
-			urlList.add(pUrl);
+			if(!urlList.contains(pUrl)){
+				urlList.add(pUrl);
+			}
 		}
 	}
 	private void insertIntoURL(String pUrl,ArrayList<WordOccurrenceContainer> pList){
