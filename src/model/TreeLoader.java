@@ -29,7 +29,7 @@ public class TreeLoader {
 	public void loadTrees() {
 		int width = this.json.getWidth();
 		int depth = this.json.getDepth();
-		this.loadTrees(this.json.getUrls(), width, depth-1);
+		this.loadTrees(this.json.getUrls(), width, depth);
 	}
 	
 	private void loadTrees(ArrayList<String> pUrls, int pWidth, int pDepth) {
