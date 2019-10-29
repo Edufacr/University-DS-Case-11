@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import jdk.jfr.Percentage;
 import model.AVLTree;
 import model.IConstants;
 import model.SearchManager;
@@ -23,6 +24,7 @@ public class MainWindow extends JFrame implements Observer {
     private JPanel mainPanel;
     private SearchManager manager;
     private Dimension labelDim;
+    private JLabel percentage;
 
     public MainWindow(String pName,SearchManager pManager){
         super(pName);
@@ -81,6 +83,9 @@ public class MainWindow extends JFrame implements Observer {
         buttonPanel.add(domainSearchButton);
         buttonPanel.add(rangeSearchButton);
         buttonPanel.add(wordSearchButton);
+
+        percentage = new JLabel("Percentage");
+        buttonPanel.add(percentage);
         return buttonPanel;
     }
     private JScrollPane CreateScrollArea(){
@@ -105,6 +110,8 @@ public class MainWindow extends JFrame implements Observer {
             label.setPreferredSize(labelDim);
             mainPanel.add(new JLabel(text));
         }
+        String toShow = "Comparisons:"+Integer.toString(manager.getComparisons()) + " Total:"+Integer.toString(manager.getIndexedWords());
+        this.percentage.setText(toShow);
         mainPanel.revalidate();
     }
 }
