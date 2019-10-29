@@ -10,6 +10,8 @@ public class SearchManager extends Observable {
     private AVLTree<Word> urlTree;
     private AVLTree<Word> wordTree;
     private int indexedWords;
+    private int comparisons;
+    private int treeSize;
 
     public SearchManager(AVLTree<Word> pWordTree, BPlusTree<Integer,ArrayList<String>> pOccurrenceTree,AVLTree<Word> pUrlTree,int pIndexedWords){
         wordTree = pWordTree;
@@ -34,6 +36,7 @@ public class SearchManager extends Observable {
                     retList.add(wordTree.get(wordContainer).getList());
                 }
             }
+            comparisons = wordTree.getComparisons();
             setChanged();
             notifyObservers(getIntersections(retList));
         }
@@ -72,6 +75,7 @@ public class SearchManager extends Observable {
                 int lowerKey = Integer.parseInt(numbers[0]);
                 int highKey = Integer.parseInt(numbers[1]);
                 ArrayList<String> retList = getUnion(wordsOccurrenceTree.searchKeyRange(lowerKey,highKey)); //getUnion
+                comparisons = wordsOccurrenceTree.getComparisons();
                 setChanged();
                 notifyObservers(retList);
             }
@@ -113,10 +117,20 @@ public class SearchManager extends Observable {
             else{
                 retList.addAll(retWord.getList());
             }
+            comparisons = urlTree.getComparisons();
             setChanged();
             notifyObservers(retList);
         }
     }
+
+    public int getIndexedWords() {
+        return indexedWords;
+    }
+
+    public int getComparisons() {
+        return comparisons;
+    }
+
     public static void main(String[] args) {
 
 
