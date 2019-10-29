@@ -10,5 +10,6 @@ public interface IConstants {
 	public static final int BUTTONL_WIDTH = 70;
 	public static final int LABEL_HEIGHT = 50;
 	public static final int LABEL_WIDTH = 70;
+	public static final String SEARCHDIVIDER = " ";
 
 }

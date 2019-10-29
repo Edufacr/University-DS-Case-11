@@ -5,7 +5,7 @@ import bPlusTree.BPlusTree;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class SearchManager extends Observable {
+public class SearchManager extends Observable implements IConstants {
     private BPlusTree<Integer,ArrayList<String>> wordsOccurrenceTree;
     private AVLTree<Word> urlTree;
     private AVLTree<Word> wordTree;
@@ -43,7 +43,7 @@ public class SearchManager extends Observable {
     }
     private String[] parseWords(String pText){
         pText = pText.toLowerCase();
-        String delims = "[ ]+";
+        String delims = "["+SEARCHDIVIDER+"]+";
         return pText.split(delims);
     }
     private ArrayList<String> getIntersections(ArrayList<ArrayList<String>> pList){
