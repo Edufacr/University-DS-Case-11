@@ -147,6 +147,7 @@ public class BPlusTree<K extends Comparable<K>,V> {
     public int getComparisons() {
     	return this.comparisons;
     }
+    @Override
     public String toString(){
         BPlusNode<K,V> tmp = getFirst();
         String ret = "";
@@ -159,10 +160,10 @@ public class BPlusTree<K extends Comparable<K>,V> {
 
     public static void main(String[] args) {
         BPlusTree<Integer,Integer> tree = new BPlusTree<Integer,Integer>(4);
-        for (Integer i = 0; i<16;i++){
-            tree.add(i,i);
-        }
+//        for (Integer i = 0; i<16;i++){
+//            tree.add(i,i);
+//        }
         System.out.println(tree.toString());
-        System.out.println(tree.searchKeyRange(4,10).toString());
+//        System.out.println(tree.searchKeyRange(4,10).toString());
     }
 }
